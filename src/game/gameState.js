@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Game State Singleton v1.0
-//  Developed by: N3xari0n × Ollama × AntiGravity
+//  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
 export const GameState = {

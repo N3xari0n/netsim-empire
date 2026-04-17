@@ -50,7 +50,9 @@
         <input type="password" id="loginPass" placeholder="Password" required />
         <button type="submit" class="btn-primary">ACCESS TERMINAL</button>
         <div style="text-align:center; margin-top:14px;">
-            <a href="#" data-target="resetPass" style="color:var(--amber); font-size:11px; text-decoration:none; font-family:var(--font-mono); letter-spacing:1px; border-bottom:1px dashed var(--amber); padding-bottom:2px; transition:0.2s;">[!] FORGOT PASSWORD?</a>
+          <a href="#" data-target="resetPass"
+            style="color:var(--amber); font-size:11px; text-decoration:none; font-family:var(--font-mono); letter-spacing:1px; border-bottom:1px dashed var(--amber); padding-bottom:2px; transition:0.2s;">[!]
+            FORGOT PASSWORD?</a>
         </div>
       </form>
 
@@ -73,17 +75,20 @@
       <!-- Forgot Password Form -->
       <form id="resetPassForm" class="auth-form hidden">
         <input type="text" id="resetUser" placeholder="Username" required />
-        <input type="text" id="resetCode" placeholder="Backup Code (e.g. A1B2C3D4E5FA)" required autocomplete="off" spellcheck="false" style="font-family:var(--font-mono); text-transform:uppercase;" />
+        <input type="text" id="resetCode" placeholder="Backup Code (e.g. A1B2C3D4E5FA)" required autocomplete="off"
+          spellcheck="false" style="font-family:var(--font-mono); text-transform:uppercase;" />
         <input type="password" id="resetNewPass" placeholder="New Password (min 6 chars)" required />
         <button type="submit" class="btn-primary" style="background:var(--amber); color:#000;">RESET AUTHORITY</button>
-        <p style="color:var(--amber); font-size:11px; margin-top:8px;">Warning: 12-char Backup codes are consumed upon use.</p>
+        <p style="color:var(--amber); font-size:11px; margin-top:8px;">Warning: 12-char Backup codes are consumed upon
+          use.</p>
       </form>
 
       <div id="authError" class="auth-error hidden"></div>
 
       <div class="auth-footer">
-        Developed by <span style="color:var(--cyan)">N3xari0n</span> × <span style="color:var(--green)">Ollama</span> ×
-        <span style="color:var(--amber)">AntiGravity</span>
+        Developed by <span style="color:var(--cyan)">N3xari0n</span> × <span style="color:var(--green)">arrikusuz</span>
+        ×
+        <span style="color:var(--amber)">Repzyu5</span>
       </div>
     </div>
   </div>
@@ -99,14 +104,16 @@
       <div class="splash-buttons">
         <button id="btnCampaign" class="btn-primary">▶ CAMPAIGN</button>
         <button id="btnSandbox" class="btn-secondary">🏗️ SANDBOX</button>
-        <button id="btnTutorial" class="btn-outline" style="border-color:var(--cyan); color:var(--cyan);">❔ KERNEL MANUAL</button>
-        <button id="btnSettingsMenu" class="btn-outline" style="border-color:var(--purple); color:var(--purple);">⚙️ SETTINGS</button>
+        <button id="btnTutorial" class="btn-outline" style="border-color:var(--cyan); color:var(--cyan);">❔ KERNEL
+          MANUAL</button>
+        <button id="btnSettingsMenu" class="btn-outline" style="border-color:var(--purple); color:var(--purple);">⚙️
+          SETTINGS</button>
         <button id="btnLogout" class="btn-outline" style="border-color:var(--red); color:var(--red);">⏏️ LOGOUT</button>
       </div>
 
       <div
         style="margin-top:40px; width:100%; text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--muted);">
-        Developed by N3xari0n × Ollama × AntiGravity
+        Developed by N3xari0n × arrikusuz × Repzyu5
       </div>
     </div>
   </div>
@@ -165,7 +172,7 @@
       <div class="tool-section mt-10">TOOLS</div>
       <button class="tool-btn active" data-tool="select" title="Select (V)"><span class="icon">👆 SELECT</span></button>
       <button class="tool-btn" data-tool="move" title="Move (M)"><span class="icon">✋ MOVE</span></button>
-      <button class="tool-btn" data-tool="ping" title="Send Packet (P)"><span class="icon">📨 SEND</span></button>
+      <button class="tool-btn" data-tool="ping" title="Send Packet (G)"><span class="icon">📨 SEND</span></button>
       <button class="tool-btn danger" data-tool="delete" title="Delete (D)"><span class="icon">🗑️
           DELETE</span></button>
       <button id="btnMassDelete" class="tool-btn" style="font-size:10px;color:var(--red);border-color:var(--red);"
@@ -271,50 +278,74 @@
   <!-- ════════════════════════════════════════════════════════════
        SECURITY OVERLAYS (Settings, Backup Codes, Advisory)
        ════════════════════════════════════════════════════════════ -->
-  
+
   <div id="backupCodesDisplay" class="modal-overlay hidden" style="z-index: 10000; background:rgba(0,0,0,0.95)">
     <div class="modal-box wide" style="max-width:550px; border: 1px solid var(--amber);">
       <h2 style="color:var(--amber); font-family:var(--font-logo);">⚠️ CRITICAL: BACKUP CODES</h2>
-      <p style="color:var(--muted); font-size:12px; margin-bottom:16px;">Copy these 12 emergency recovery codes securely. This is the <b>ONLY</b> time they will be shown. If you lose your password and these codes, your account is permanently unrecoverable.</p>
-      <div id="backupCodesList" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; background:rgba(0,0,0,0.8); padding:16px; border-radius:8px; border:1px solid #333; font-family:var(--font-mono); color:var(--cyan); font-size:16px; font-weight:bold; text-align:center;"></div>
-      <button class="btn-primary" style="margin-top:20px; width:100%" onclick="document.getElementById('backupCodesDisplay').classList.add('hidden')">I HAVE SAVED THESE CODES COMMITTING TO MEMORY</button>
+      <p style="color:var(--muted); font-size:12px; margin-bottom:16px;">Copy these 12 emergency recovery codes
+        securely. This is the <b>ONLY</b> time they will be shown. If you lose your password and these codes, your
+        account is permanently unrecoverable.</p>
+      <div id="backupCodesList"
+        style="display:grid; grid-template-columns:1fr 1fr; gap:8px; background:rgba(0,0,0,0.8); padding:16px; border-radius:8px; border:1px solid #333; font-family:var(--font-mono); color:var(--cyan); font-size:16px; font-weight:bold; text-align:center;">
+      </div>
+      <button class="btn-primary" style="margin-top:20px; width:100%"
+        onclick="document.getElementById('backupCodesDisplay').classList.add('hidden')">I HAVE SAVED THESE CODES
+        COMMITTING TO MEMORY</button>
     </div>
   </div>
 
   <div id="settingsModal" class="modal-overlay hidden" style="z-index: 9000;">
     <div class="modal-box" style="max-width:500px; border:1px solid var(--purple);">
-        <div class="modal-header">
-           <h2 style="color:var(--purple); font-family:var(--font-logo);">⚙️ SYS_SETTINGS</h2>
-           <button class="btn-close modal-close" data-close="settingsModal">&times;</button>
+      <div class="modal-header">
+        <h2 style="color:var(--purple); font-family:var(--font-logo);">⚙️ Settings</h2>
+        <button class="btn-close modal-close" data-close="settingsModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div
+          style="margin-bottom:20px; padding:16px; border:1px solid rgba(255,191,0,0.3); background:rgba(255,191,0,0.05); border-radius:4px;">
+          <h3 style="color:var(--amber); margin-top:0;">REGENERATE RECOVERY CODES</h3>
+          <p style="font-size:11px; color:var(--muted); margin-bottom:10px;">Burn all old codes and generate 12 new
+            recovery keys. Requires active password.</p>
+          <input type="password" id="regenPassword" placeholder="Current Password"
+            style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
+          <button id="btnRegenerateCodes" class="btn-primary"
+            style="background:transparent; border:1px solid var(--amber); color:var(--amber); padding:8px 16px; font-size:11px;">EXECUTE
+            REGENERATION</button>
         </div>
-        <div class="modal-body">
-           <div style="margin-bottom:20px; padding:16px; border:1px solid rgba(255,191,0,0.3); background:rgba(255,191,0,0.05); border-radius:4px;">
-               <h3 style="color:var(--amber); margin-top:0;">REGENERATE RECOVERY CODES</h3>
-               <p style="font-size:11px; color:var(--muted); margin-bottom:10px;">Burn all old codes and generate 12 new recovery keys. Requires active password.</p>
-               <input type="password" id="regenPassword" placeholder="Current Password" style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
-               <button id="btnRegenerateCodes" class="btn-primary" style="background:transparent; border:1px solid var(--amber); color:var(--amber); padding:8px 16px; font-size:11px;">EXECUTE REGENERATION</button>
-           </div>
 
-           <div style="padding:16px; border:1px solid rgba(255,34,68,0.3); background:rgba(255,34,68,0.05); border-radius:4px;">
-               <h3 style="color:var(--red); margin-top:0;">NUCLEAR: DELETION REQUEST</h3>
-               <p style="font-size:11px; color:var(--muted); margin-bottom:10px;">Flag your account for permanent developer deletion. This action immediately terminates your active session. Requires validation.</p>
-               <input type="text" id="delUsername" placeholder="Exact Username" style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
-               <input type="password" id="delPassword" placeholder="Current Password" style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
-               <button id="btnDeleteRequest" class="btn-primary" style="background:var(--red); color:#000; padding:8px 16px; font-size:11px; border:none;">SUBMIT PURGE REQUEST</button>
-           </div>
+        <div
+          style="padding:16px; border:1px solid rgba(255,34,68,0.3); background:rgba(255,34,68,0.05); border-radius:4px;">
+          <h3 style="color:var(--red); margin-top:0;">NUCLEAR: DELETION REQUEST</h3>
+          <p style="font-size:11px; color:var(--muted); margin-bottom:10px;">Flag your account for permanent developer
+            deletion. This action immediately terminates your active session. Requires validation.</p>
+          <input type="text" id="delUsername" placeholder="Exact Username"
+            style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
+          <input type="password" id="delPassword" placeholder="Current Password"
+            style="width:100%; margin-bottom:8px; padding:8px; background:#000; border:1px solid #333; color:white; font-family:var(--font-mono)">
+          <button id="btnDeleteRequest" class="btn-primary"
+            style="background:var(--red); color:#000; padding:8px 16px; font-size:11px; border:none;">SUBMIT PURGE
+            REQUEST</button>
         </div>
+      </div>
     </div>
   </div>
 
   <div id="perfAdvisoryModal" class="modal-overlay hidden" style="z-index: 9500; background:rgba(0,0,0,0.85);">
     <div class="modal-box wide" style="max-width:550px; background: rgba(5,5,10,0.95); border: 1px solid var(--amber);">
-        <h2 style="font-family:var(--font-logo); color:var(--amber); text-align:center;">[SYS_WARNING] PERFORMANCE ADVISORY</h2>
-        <div style="font-family:var(--font-mono); font-size:12px; color:var(--muted); padding:16px; line-height:1.6; border-top:1px solid rgba(255,191,0,0.2); border-bottom:1px solid rgba(255,191,0,0.2); margin: 16px 0;">
-            Rendering multiple packets, clients, and extensive hardware routing dynamically stresses active CPU threads. If you are operating on low-fidelity hardware, limit your cluster structures to prevent client-side desynchronization (lag).
-            <br><br>
-            <span style="color:var(--green); font-weight:bold;">Recommended: High-end browser, HW acceleration ENABLED.</span>
-        </div>
-        <button class="btn-primary" style="width:100%; background:transparent; border:1px solid var(--amber); color:var(--amber);" onclick="document.getElementById('perfAdvisoryModal').classList.add('hidden')">ACKNOWLEDGE VERDICT</button>
+      <h2 style="font-family:var(--font-logo); color:var(--amber); text-align:center;">⚠️ Performance
+        Advisory</h2>
+      <div
+        style="font-family:var(--font-mono); font-size:12px; color:var(--muted); padding:16px; line-height:1.6; border-top:1px solid rgba(255,191,0,0.2); border-bottom:1px solid rgba(255,191,0,0.2); margin: 16px 0;">
+        Rendering multiple packets, clients, and extensive hardware routing dynamically stresses active CPU threads. If
+        you are operating on low-fidelity hardware, limit your cluster structures to prevent client-side
+        desynchronization (lag).
+        <br><br>
+        <span style="color:var(--green); font-weight:bold;">Recommended: High-end browser, HW acceleration
+          ENABLED.</span>
+      </div>
+      <button class="btn-primary"
+        style="width:100%; background:transparent; border:1px solid var(--amber); color:var(--amber);"
+        onclick="document.getElementById('perfAdvisoryModal').classList.add('hidden')">ACKNOWLEDGE VERDICT</button>
     </div>
   </div>
 
@@ -402,109 +433,185 @@
   </div>
 
   <div id="tutorialOverlay" class="modal-overlay hidden">
-    <div class="modal-box wide" style="max-width:700px; background: rgba(5,5,10,0.95); border: 1px solid var(--cyan); box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);">
-      <div class="modal-header" style="border-bottom: 1px solid rgba(0, 245, 255, 0.2); background: rgba(0, 245, 255, 0.05);">
-        <h2 style="font-family: var(--font-logo); color: var(--cyan); text-transform: uppercase;">[SYS_DOC] Operator Training Manual</h2>
+    <div class="modal-box wide"
+      style="max-width:700px; background: rgba(5,5,10,0.95); border: 1px solid var(--cyan); box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);">
+      <div class="modal-header"
+        style="border-bottom: 1px solid rgba(0, 245, 255, 0.2); background: rgba(0, 245, 255, 0.05);">
+        <h2 style="font-family: var(--font-logo); color: var(--cyan); text-transform: uppercase;">📖 Operator
+          Training Manual</h2>
         <button class="btn-close modal-close" data-close="tutorialOverlay" style="color: var(--cyan);">&times;</button>
       </div>
       <div class="modal-body" style="max-height:70vh;overflow-y:auto; padding: 20px;">
-        
-        <div style="text-align:center;margin-bottom:24px; border-bottom: 1px dashed var(--muted); padding-bottom: 20px;">
-          <div style="font-family:var(--font-logo);font-size:24px;color:var(--cyan);letter-spacing:4px;text-shadow:0 0 15px rgba(0,245,255,.3);margin-bottom:6px;">
-            NETSIM <span style="color:var(--green);">EMPIRE</span> // <span style="color: var(--amber);">ARCHIVE</span></div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:1px;">NETWORK STRATEGY SIMULATION &mdash; KERNEL_GUIDE_V1.X</div>
+
+        <div
+          style="text-align:center;margin-bottom:24px; border-bottom: 1px dashed var(--muted); padding-bottom: 20px;">
+          <div
+            style="font-family:var(--font-logo);font-size:24px;color:var(--cyan);letter-spacing:4px;text-shadow:0 0 15px rgba(0,245,255,.3);margin-bottom:6px;">
+            NETSIM <span style="color:var(--green);">EMPIRE</span> // <span style="color: var(--amber);">ARCHIVE</span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:1px;">NETWORK
+            STRATEGY SIMULATION &mdash; KERNEL_GUIDE_V1.X</div>
         </div>
 
-        <div style="background:rgba(0, 245, 255,.04); border-left: 4px solid var(--cyan); padding: 16px; margin-bottom:20px; font-family: var(--font-mono);">
-          <div style="color:var(--cyan); font-weight:bold; letter-spacing:1px; margin-bottom:8px;">> PRIMARY_OBJECTIVE</div>
-          <div style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6;">Initialize and deploy local packet-routing architectures. Scale globally. Fulfill high-end corporate <span style="color:var(--amber);">Contracts</span> via the CLI terminal, establish Firewalls to repel cryptographic attacks, and manage raw infrastructure SLA times under absolute precision.</div>
+        <div
+          style="background:rgba(0, 245, 255,.04); border-left: 4px solid var(--cyan); padding: 16px; margin-bottom:20px; font-family: var(--font-mono);">
+          <div style="color:var(--cyan); font-weight:bold; letter-spacing:1px; margin-bottom:8px;">> PRIMARY_OBJECTIVE
+          </div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6;">Initialize and deploy local
+            packet-routing architectures. Scale globally. Fulfill high-end corporate <span
+              style="color:var(--amber);">Contracts</span> via the CLI terminal, establish Firewalls to repel
+            cryptographic attacks, and manage raw infrastructure SLA times under absolute precision.</div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px; font-family: var(--font-mono);">
-          
-          <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
-            <div style="color:var(--cyan);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(0,245,255,0.2); padding-bottom: 4px;">// HARDWARE_DEPLOYMENT</div>
-            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Access the left terminal rack to rack-mount Nodes (Routers, Switches, PCs). Drop them onto the active subnet canvas.</div>
-          </div>
-          
-          <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
-            <div style="color:var(--green);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(57,255,20,0.2); padding-bottom: 4px;">// TOPOLOGY_LINKING</div>
-            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Select physical <span style="color:var(--green);">Cables</span>. Tap Node A, then Node B to establish physical TCP handshakes. Research Fiber for 400G bypasses.</div>
+        <div
+          style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px; font-family: var(--font-mono);">
+
+          <div
+            style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
+            <div
+              style="color:var(--cyan);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(0,245,255,0.2); padding-bottom: 4px;">
+              // HARDWARE_DEPLOYMENT</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Access the left terminal rack to rack-mount
+              Nodes (Routers, Switches, PCs). Drop them onto the active subnet canvas.</div>
           </div>
 
-          <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
-            <div style="color:var(--amber);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(255, 191, 0, 0.2); padding-bottom: 4px;">// MULTI_SITE_CONTRACTS</div>
-            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Hit <span style="color:var(--amber);">~</span> to open the CLI. Utilize <span style="color:var(--amber);">contract connect [id]</span> to temporarily isolate your session and deploy hardware specifically for enterprise clients.</div>
+          <div
+            style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
+            <div
+              style="color:var(--green);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(57,255,20,0.2); padding-bottom: 4px;">
+              // TOPOLOGY_LINKING</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Select physical <span
+                style="color:var(--green);">Cables</span>. Tap Node A, then Node B to establish physical TCP handshakes.
+              Research Fiber for 400G bypasses.</div>
           </div>
 
-          <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
-            <div style="color:var(--red);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(255,34,68,0.2); padding-bottom: 4px;">// LAYER_VISIBILITY</div>
-            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Bottom-right terminal allows swapping UI arrays to <span style="color:var(--red);">Heatmap</span> (thermal stress diagnostics) or <span style="color:var(--red);">Security</span> (cryptographic radar).</div>
+          <div
+            style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
+            <div
+              style="color:var(--amber);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(255, 191, 0, 0.2); padding-bottom: 4px;">
+              // MULTI_SITE_CONTRACTS</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Hit <span
+                style="color:var(--amber);">~</span> to open the CLI. Utilize <span style="color:var(--amber);">contract
+                connect [id]</span> to temporarily isolate your session and deploy hardware specifically for enterprise
+              clients.</div>
+          </div>
+
+          <div
+            style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:4px;">
+            <div
+              style="color:var(--red);margin-bottom:8px;font-size:12px; border-bottom: 1px solid rgba(255,34,68,0.2); padding-bottom: 4px;">
+              // LAYER_VISIBILITY</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Bottom-right terminal allows swapping UI
+              arrays to <span style="color:var(--red);">Heatmap</span> (thermal stress diagnostics) or <span
+                style="color:var(--red);">Security</span> (cryptographic radar).</div>
           </div>
 
         </div>
 
-        <div style="background:rgba(255,255,255,.02); border:1px solid var(--border); padding:16px; font-family: var(--font-mono);">
-          <div style="color:var(--muted); letter-spacing:1px; margin-bottom:12px; font-size:12px; font-weight:bold;">> KEYBOARD_INTERRUPTS</div>
+        <div
+          style="background:rgba(255,255,255,.02); border:1px solid var(--border); padding:16px; font-family: var(--font-mono);">
+          <div style="color:var(--muted); letter-spacing:1px; margin-bottom:12px; font-size:12px; font-weight:bold;">>
+            KEYBOARD_INTERRUPTS</div>
           <div style="display:grid;grid-template-columns:repeat(4, 1fr); gap:8px; font-size:11px; text-align: center;">
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">V</span> Select</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">C</span> Cable</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">D</span> Delete</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">~</span> Open CLI</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">R</span> Router</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">S</span> Switch</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">Esc</span> Abort Op</div>
-            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span style="color:var(--cyan); font-weight:bold;">P</span> Pause</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">V</span> Select</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">C</span> Cable</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">D</span> Delete</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">~</span> Open CLI</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">R</span> Router</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">S</span> Switch</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">G</span> Send Pkt</div>
+            <div style="background: rgba(0,245,255,0.05); padding: 6px; border-radius: 4px;"><span
+                style="color:var(--cyan); font-weight:bold;">P</span> Pause</div>
           </div>
         </div>
 
-        <div style="text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-family:var(--font-mono); margin-top: 24px;">[EOF] End of Manual. Developed by N3xari0n &times; Ollama &times; AntiGravity.</div>
+        <div
+          style="text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-family:var(--font-mono); margin-top: 24px;">
+          [EOF] End of Manual. Developed by N3xari0n &times; arrikusuz &times; Repzyu5.</div>
       </div>
     </div>
   </div>
 
   <div id="policyModal" class="modal-overlay hidden" style="z-index: 9999;">
-    <div class="modal-box wide" style="max-width:650px; background: rgba(5,5,10,0.95); border: 1px solid var(--red); box-shadow: 0 0 40px rgba(255, 34, 68, 0.1);">
-      <div class="modal-header" style="border-bottom: 1px solid rgba(255, 34, 68, 0.2); background: rgba(255, 34, 68, 0.05);">
-        <h2 style="font-family: var(--font-logo); color: var(--red); text-transform: uppercase;">[SYS_COMPLIANCE] Data Privacy Agreement</h2>
+    <div class="modal-box wide"
+      style="max-width:650px; background: rgba(5,5,10,0.95); border: 1px solid var(--red); box-shadow: 0 0 40px rgba(255, 34, 68, 0.1);">
+      <div class="modal-header"
+        style="border-bottom: 1px solid rgba(255, 34, 68, 0.2); background: rgba(255, 34, 68, 0.05);">
+        <h2 style="font-family: var(--font-logo); color: var(--red); text-transform: uppercase;">🔒 Data
+          Privacy Agreement</h2>
         <button class="btn-close modal-close" data-close="policyModal" style="color: var(--red);">&times;</button>
       </div>
       <div class="modal-body" style="max-height:70vh;overflow-y:auto; padding: 20px; font-family: var(--font-mono);">
-        
+
         <div style="text-align:center;margin-bottom:20px;">
-          <div style="font-family:var(--font-logo);font-size:20px;color:var(--cyan);letter-spacing:3px;margin-bottom:6px;">
+          <div
+            style="font-family:var(--font-logo);font-size:20px;color:var(--cyan);letter-spacing:3px;margin-bottom:6px;">
             NETSIM <span style="color:var(--green);">EMPIRE</span> // <span style="color: var(--muted);">TOS_V2.0</span>
           </div>
-          <div style="font-size:10px;color:var(--amber);letter-spacing:1px; background: rgba(255,191,0,0.1); display: inline-block; padding: 4px 12px; border-radius: 4px;">SECURE DATA POLICY // READ MANDATORY</div>
+          <div
+            style="font-size:10px;color:var(--amber);letter-spacing:1px; background: rgba(255,191,0,0.1); display: inline-block; padding: 4px 12px; border-radius: 4px;">
+            SECURE DATA POLICY // READ MANDATORY</div>
         </div>
 
-        <div style="margin-bottom:16px; border-left: 3px solid var(--cyan); padding-left: 12px; background: rgba(0,245,255,0.02); padding: 12px;">
-          <div style="color:var(--cyan); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">> 01_DATA_COLLECTION</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;">We securely harvest your <span style="color:var(--white);">username</span>, <span style="color:var(--white);">email payload</span>, and a <span style="color:var(--white);">cryptographically hashed password</span> during initialization. Client IPv4s are monitored to detect malicious proxy/botnet spoofing. Passwords utilize heavy-iteration bcrypt hashing. Plaintext storage is strictly disabled at the kernel level.</div>
+        <div
+          style="margin-bottom:16px; border-left: 3px solid var(--cyan); padding-left: 12px; background: rgba(0,245,255,0.02); padding: 12px;">
+          <div style="color:var(--cyan); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">>
+            01_DATA_COLLECTION</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">We securely harvest your <span
+              style="color:var(--white);">username</span>, <span style="color:var(--white);">email payload</span>, and a
+            <span style="color:var(--white);">cryptographically hashed password</span> during initialization. Client
+            IPv4s are monitored to detect malicious proxy/botnet spoofing. Passwords utilize heavy-iteration bcrypt
+            hashing. Plaintext storage is strictly disabled at the kernel level.
+          </div>
         </div>
 
-        <div style="margin-bottom:16px; border-left: 3px solid var(--green); padding-left: 12px; background: rgba(57,255,20,0.02); padding: 12px;">
-          <div style="color:var(--green); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">> 02_DISTRIBUTION_LOCKOUT</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Your local database records are sealed. We will <span style="color:var(--green);font-weight:700;">NEVER</span> broker, export, or compromise your personal data vectors to external IP factions. Global Leaderboard arrays are the only strictly exposed variables.</div>
+        <div
+          style="margin-bottom:16px; border-left: 3px solid var(--green); padding-left: 12px; background: rgba(57,255,20,0.02); padding: 12px;">
+          <div style="color:var(--green); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">>
+            02_DISTRIBUTION_LOCKOUT</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Your local database records are sealed. We
+            will <span style="color:var(--green);font-weight:700;">NEVER</span> broker, export, or compromise your
+            personal data vectors to external IP factions. Global Leaderboard arrays are the only strictly exposed
+            variables.</div>
         </div>
 
-        <div style="margin-bottom:16px; border-left: 3px solid var(--amber); padding-left: 12px; background: rgba(255,191,0,0.02); padding: 12px;">
-          <div style="color:var(--amber); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">> 03_ANTI_SPOOF_OBLIGATION</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;"><span style="color:var(--white);font-weight:700;">Single node origin strictly enforced</span>. Multi-client boxing, malicious Tor routing, or unauthorized VPN masking throws an immediate suspension flag. Play fairly, or face automated packet drops.</div>
+        <div
+          style="margin-bottom:16px; border-left: 3px solid var(--amber); padding-left: 12px; background: rgba(255,191,0,0.02); padding: 12px;">
+          <div style="color:var(--amber); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">>
+            03_ANTI_SPOOF_OBLIGATION</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;"><span
+              style="color:var(--white);font-weight:700;">Single node origin strictly enforced</span>. Multi-client
+            boxing, malicious Tor routing, or unauthorized VPN masking throws an immediate suspension flag. Play fairly,
+            or face automated packet drops.</div>
         </div>
 
-        <div style="margin-bottom:16px; border-left: 3px solid var(--purple); padding-left: 12px; background: rgba(157,0,255,0.02); padding: 12px;">
-          <div style="color:var(--purple); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">> 04_FINANCIAL_EXCHANGE</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Digital capital injections via our terminal (GCash, Maya) yield non-refundable secure Credits. Donations grant zero performance boosts on the grid.</div>
+        <div
+          style="margin-bottom:16px; border-left: 3px solid var(--purple); padding-left: 12px; background: rgba(157,0,255,0.02); padding: 12px;">
+          <div style="color:var(--purple); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">>
+            04_FINANCIAL_EXCHANGE</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Digital capital injections via our terminal
+            (GCash, Maya) yield non-refundable secure Credits. Donations grant zero performance boosts on the grid.
+          </div>
         </div>
 
-        <div style="margin-bottom:16px; border-left: 3px solid var(--red); padding-left: 12px; background: rgba(255,34,68,0.02); padding: 12px;">
-          <div style="color:var(--red); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">> 05_NUCLEAR_PURGE_RIGHTS</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Operators retain the right to submit an <span style="color:var(--white);">Account Deletion Request</span> via the internal Settings terminal. Approval results in a 100% total data table wipe.</div>
+        <div
+          style="margin-bottom:16px; border-left: 3px solid var(--red); padding-left: 12px; background: rgba(255,34,68,0.02); padding: 12px;">
+          <div style="color:var(--red); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:12px;">>
+            05_NUCLEAR_PURGE_RIGHTS</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Operators retain the right to submit an <span
+              style="color:var(--white);">Account Deletion Request</span> via the internal Settings terminal. Approval
+            results in a 100% total data table wipe.</div>
         </div>
 
         <div style="text-align:center;margin-top:20px;font-size:9px;color:rgba(255,255,255,.2);">
-          NetSim Empire v2.0 &mdash; COMPLIANCE AGREEMENT VALIDATED &mdash; &copy; 2026 N3xari0n &times; AntiGravity
+          NetSim Empire v2.0 &mdash; COMPLIANCE AGREEMENT VALIDATED &mdash; &copy; 2026 N3xari0n &times; Repzyu5
         </div>
       </div>
     </div>
@@ -517,7 +624,7 @@
       <div
         style="font-family:var(--font-logo);font-size:48px;color:var(--cyan);letter-spacing:8px;text-shadow:0 0 40px rgba(0,245,255,.5);">
         PAUSED</div>
-      <div style="font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-top:8px;">Press ⏸ or P to resume
+      <div style="font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-top:8px;">Press ⏸ or [P] to resume
       </div>
     </div>
   </div>

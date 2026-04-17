@@ -265,7 +265,7 @@ export class HUD {
       </div>
       
       <div style="margin-top:24px; font-size:12px; color:var(--muted); font-family:var(--font-mono); text-align:center;">
-        [SYS_TIP] Use CLI command <span style="color:var(--cyan);">contract connect ${c.id}</span> to initialize instantly.
+        💡 Tip: Use CLI command <span style="color:var(--cyan);">contract connect ${c.id}</span> to initialize instantly.
       </div>
     `;
     

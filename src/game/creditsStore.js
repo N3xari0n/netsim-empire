@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Credits Store & GCash Gateway
-//  Developed by: N3xari0n × Ollama × AntiGravity
+//  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -244,7 +244,7 @@ export class CreditsStore {
       <!-- Footer -->
       <div style="text-align:center;margin-top:16px;font-size:10px;color:rgba(255,255,255,.25);font-family:var(--font-mono);">
         Payments processed securely via PayMongo API. Credits are non-refundable.<br>
-        Developed by N3xari0n × Ollama × AntiGravity
+        Developed by N3xari0n × arrikusuz × Repzyu5
       </div>
     `;
 

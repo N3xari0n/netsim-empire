@@ -450,7 +450,7 @@ export class CLI {
   }
 
   _cmdCredits() {
-    this._print('Game credits: N3xari0n × Ollama × AntiGravity', 'cyan');
+    this._print('Game credits: N3xari0n × arrikusuz × Repzyu5', 'cyan');
     this._print('NetSim Empire v1.0 — Educational Network Simulator', 'white');
   }
 

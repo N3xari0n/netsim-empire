@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Contracts & Missions System v1.0
-//  Developed by: N3xari0n × Ollama × AntiGravity
+//  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -376,9 +376,16 @@ export class ContractsManager {
 
   update(dtMs, network) {
     if (GameState.paused) return;
+    if (!network || !network.nodes) return; // Safety guard during teleport transitions
 
     for (const contract of [...GameState.activeContracts]) {
-      const result = contract.check(network, GameState);
+      let result;
+      try {
+        result = contract.check(network, GameState);
+      } catch (e) {
+        // Contract check can fail during network transitions (teleport)
+        result = { done: false, reason: 'Evaluating...' };
+      }
 
       if (result.done) {
         const held = (this._timers.get(contract.id) || 0) + dtMs;
@@ -398,6 +405,9 @@ export class ContractsManager {
   }
 
   _complete(contract) {
+    // Prevent double-completion
+    if (GameState.completedContracts.includes(contract.id)) return;
+
     GameState.activeContracts = GameState.activeContracts.filter(c => c.id !== contract.id);
     GameState.completedContracts.push(contract.id);
     this._timers.delete(contract.id);
@@ -415,8 +425,11 @@ export class ContractsManager {
 
     if (GameState.activeSite === contract.id) {
       setTimeout(() => {
-        this.ui.toast('🚀 Auto-Return', `Securing infrastructure. Teleporting to Home Lab...`, 'info');
-        if (window._netSimTeleportHome) window._netSimTeleportHome();
+        // Double-check we haven't already teleported home
+        if (GameState.activeSite !== 'home') {
+          this.ui.toast('🚀 Auto-Return', `Securing infrastructure. Teleporting to Home Lab...`, 'info');
+          if (window._netSimTeleportHome) window._netSimTeleportHome();
+        }
       }, 3000);
     }
   }

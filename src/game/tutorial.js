@@ -1,5 +1,6 @@
 // ═══════════════════════════════════════════════════════════
-//  NetSim Empire — Interactive Tutorial System
+//  NetSim Empire — Interactive Tutorial System v1.0
+//  Expanded with Contracts walkthrough
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -13,6 +14,9 @@ export class TutorialManager {
     this.title = document.getElementById('tutTitle');
     this.body = document.getElementById('tutBody');
     this.skipBtn = document.getElementById('tutBtnSkip');
+
+    // Track contract modal opened (set by HUD button listener)
+    this._contractsOpened = false;
 
     if (this.skipBtn) {
       this.skipBtn.addEventListener('click', () => this.complete());
@@ -35,7 +39,12 @@ export class TutorialManager {
     this.completed = true;
     localStorage.setItem('netsim_tutorial', 'true');
     this.box.classList.add('hidden');
-    this.ui.toast('🎓 Tutorial Complete', 'You are ready to expand your Empire!', 'success');
+    this.ui.toast('🎓 Tutorial Complete', 'You are now cleared for full operations. Expand your Empire!', 'success');
+  }
+
+  // Called externally when Contracts modal is opened
+  notifyContractsOpened() {
+    this._contractsOpened = true;
   }
 
   update(network, activeTool) {
@@ -81,7 +90,7 @@ export class TutorialManager {
           this.updateUI();
         }
         break;
-        
+
       case 6:
         // Needs to select SEND packet tool
         if (activeTool === 'ping') {
@@ -93,6 +102,30 @@ export class TutorialManager {
       case 7:
         // Needs to SEND a packet
         if (GameState.totalPacketsSent > 0) {
+          this.step = 8;
+          this.updateUI();
+        }
+        break;
+
+      case 8:
+        // Needs to open Contracts modal
+        if (this._contractsOpened) {
+          this.step = 9;
+          this.updateUI();
+        }
+        break;
+
+      case 9:
+        // Needs to accept a contract
+        if (GameState.activeContracts.length > 0) {
+          this.step = 10;
+          this.updateUI();
+        }
+        break;
+
+      case 10:
+        // Needs to complete a contract (or have started building toward it)
+        if (GameState.completedContracts.length > 0) {
           this.complete();
         }
         break;
@@ -116,7 +149,7 @@ export class TutorialManager {
         break;
       case 4:
         this.title.textContent = 'Wiring the Network';
-        this.body.innerHTML = 'Now we need to create a physical connection between them.<br><br>👉 Click the <b>🔗 Connect</b> cable icon in the toolbar (shortcut: C).';
+        this.body.innerHTML = 'Now we need to create a physical connection between them.<br><br>👉 Click the <b>🔗 Connect</b> cable icon in the toolbar (shortcut: <b>C</b>).';
         break;
       case 5:
         this.title.textContent = 'Terminate the Cable';
@@ -124,11 +157,23 @@ export class TutorialManager {
         break;
       case 6:
         this.title.textContent = 'Test the Connection';
-        this.body.innerHTML = 'Look at that! Traffic will automatically route, but to test if it is physically reachable, we use ping packets.<br><br>👉 Click the <b>📨 SEND</b> tool in the toolbar (shortcut: P).';
+        this.body.innerHTML = 'Traffic will automatically route, but to test if it is physically reachable, we use ping packets.<br><br>👉 Click the <b>📨 SEND</b> tool in the toolbar (shortcut: <b>G</b>).';
         break;
       case 7:
         this.title.textContent = 'Ping the Server';
         this.body.innerHTML = '👉 With the SEND tool active, <b>click your PC</b> first as the origin, and then <b>click your Server</b> as the destination.';
+        break;
+      case 8:
+        this.title.textContent = '📋 Discover Contracts';
+        this.body.innerHTML = 'Great work! Your first network is live. Now let\'s earn money through <b style="color:var(--amber);">Contracts</b> — missions from enterprise clients.<br><br>👉 Click the <b>📋 Contracts</b> button in the top navigation bar.';
+        break;
+      case 9:
+        this.title.textContent = '🤝 Accept a Mission';
+        this.body.innerHTML = 'Browse the available contracts. Each one has specific requirements you must build.<br><br>👉 Click <b style="color:var(--amber);">Accept Contract</b> on any available mission. You\'ll be teleported to the client\'s environment to build their network.';
+        break;
+      case 10:
+        this.title.textContent = '🏗️ Complete the Contract';
+        this.body.innerHTML = 'You\'re now in the client\'s isolated environment. Deploy the required devices and cables to fulfill the contract objectives.<br><br>Once all conditions are met, hold them for the required duration. You\'ll auto-return home with your reward!<br><br><small style="color:var(--muted);">Tip: Check the mission banner at the bottom for live progress.</small>';
         break;
     }
   }
