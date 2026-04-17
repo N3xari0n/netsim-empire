@@ -270,6 +270,9 @@ export class HUD {
       <div style="margin-top:24px; font-size:12px; color:var(--muted); font-family:var(--font-mono); text-align:center;">
         💡 Tip: Use CLI command <span style="color:var(--cyan);">contract connect ${c.id}</span> to initialize instantly.
       </div>
+      <div style="margin-top:16px; text-align:center;">
+        <button class="btn-outline" onclick="document.getElementById('contractHelpModal').classList.add('hidden'); document.getElementById('contractsModal').classList.remove('hidden');" style="width:100%;">🔙 Back to Contracts</button>
+      </div>
     `;
     
     el.classList.remove('hidden');
