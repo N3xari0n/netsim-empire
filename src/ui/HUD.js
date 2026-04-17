@@ -194,7 +194,7 @@ export class HUD {
             <div class="contract-header">
               <div class="contract-name">
                  ${c.client} — ${c.name}
-                 <button class="btn-help" onclick="if(window._netSimHUD) window._netSimHUD.showContractHelp('${c.id}')" style="background:none;border:none;color:var(--cyan);cursor:pointer;font-size:16px;margin-left:8px;" title="View Specifications">❓</button>
+                 <button class="btn-help" onclick="event.stopPropagation(); if(window._netSimHUD) window._netSimHUD.showContractHelp('${c.id}')" style="background:none;border:none;color:var(--cyan);cursor:pointer;font-size:16px;margin-left:8px;" title="View Specifications">❓</button>
               </div>
               <div class="contract-reward">+$${c.reward.toLocaleString()}</div>
             </div>
@@ -233,7 +233,7 @@ export class HUD {
       el = document.createElement('div');
       el.id = 'contractHelpModal';
       el.className = 'modal-overlay hidden';
-      el.style.zIndex = '9999';
+      el.style.zIndex = '10010';
       el.innerHTML = `
         <div class="modal-box" style="max-width:500px;">
           <button class="modal-close" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;" onclick="document.getElementById('contractHelpModal').classList.add('hidden')">✕</button>
