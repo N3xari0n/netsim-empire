@@ -228,12 +228,15 @@ export class HUD {
     const c = ALL_CONTRACTS.find(x => x.id === contractId);
     if (!c) return;
 
+    // Close the contracts modal first so there's no stacking conflict
+    const contractsModal = document.getElementById('contractsModal');
+    if (contractsModal) contractsModal.classList.add('hidden');
+
     let el = document.getElementById('contractHelpModal');
     if (!el) {
       el = document.createElement('div');
       el.id = 'contractHelpModal';
       el.className = 'modal-overlay hidden';
-      el.style.zIndex = '10010';
       el.innerHTML = `
         <div class="modal-box" style="max-width:500px;">
           <button class="modal-close" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;" onclick="document.getElementById('contractHelpModal').classList.add('hidden')">✕</button>
