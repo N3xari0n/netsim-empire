@@ -1,12 +1,12 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — IP Manager (Subnet / Address Assignment)
-//  Developed by: Nexarion × Ollama × AntiGravity
+//  Developed by: N3xari0n × Ollama × AntiGravity
 // ═══════════════════════════════════════════════════════════
 
 export class IPManager {
   constructor() {
     this.assignments = new Map();  // nodeId → { ip, cidr, subnet, gateway }
-    this.subnets     = [];         // allocated subnets
+    this.subnets = [];         // allocated subnets
     this._nextOctet3 = 1;         // 10.0.X.0
   }
 
@@ -41,7 +41,7 @@ export class IPManager {
     const match = ipWithCidr.match(/^(\d+\.\d+\.\d+\.\d+)\/(\d+)$/);
     if (!match) return { error: 'Invalid format. Use: x.x.x.x/cidr' };
 
-    const ip   = match[1];
+    const ip = match[1];
     const cidr = parseInt(match[2]);
 
     if (!this.validateIP(ip)) return { error: 'Invalid IP address' };
@@ -79,26 +79,26 @@ export class IPManager {
     const match = ipCidr.match(/^(\d+\.\d+\.\d+\.\d+)\/(\d+)$/);
     if (!match) return null;
 
-    const ip   = match[1];
+    const ip = match[1];
     const cidr = parseInt(match[2]);
     const maskBits = 0xFFFFFFFF << (32 - cidr) >>> 0;
-    const ipNum    = this.ipToNum(ip);
-    const netNum   = (ipNum & maskBits) >>> 0;
+    const ipNum = this.ipToNum(ip);
+    const netNum = (ipNum & maskBits) >>> 0;
     const bcastNum = (netNum | ~maskBits) >>> 0;
     const hostCount = Math.max(0, (1 << (32 - cidr)) - 2);
 
     return {
       ip,
       cidr,
-      mask:          this.numToIP(maskBits),
-      network:       this.numToIP(netNum),
-      broadcast:     this.numToIP(bcastNum),
-      firstHost:     hostCount > 0 ? this.numToIP(netNum + 1) : 'N/A',
-      lastHost:      hostCount > 0 ? this.numToIP(bcastNum - 1) : 'N/A',
-      totalHosts:    hostCount,
-      wildcardMask:  this.numToIP(~maskBits >>> 0),
-      class:         this._getIPClass(ip),
-      private:       this._isPrivate(ip),
+      mask: this.numToIP(maskBits),
+      network: this.numToIP(netNum),
+      broadcast: this.numToIP(bcastNum),
+      firstHost: hostCount > 0 ? this.numToIP(netNum + 1) : 'N/A',
+      lastHost: hostCount > 0 ? this.numToIP(bcastNum - 1) : 'N/A',
+      totalHosts: hostCount,
+      wildcardMask: this.numToIP(~maskBits >>> 0),
+      class: this._getIPClass(ip),
+      private: this._isPrivate(ip),
     };
   }
 
@@ -118,13 +118,13 @@ export class IPManager {
 
   getNetworkAddress(ip, cidr) {
     const maskBits = (0xFFFFFFFF << (32 - cidr)) >>> 0;
-    const netNum   = (this.ipToNum(ip) & maskBits) >>> 0;
+    const netNum = (this.ipToNum(ip) & maskBits) >>> 0;
     return this.numToIP(netNum);
   }
 
   getBroadcast(ip, cidr) {
     const maskBits = (0xFFFFFFFF << (32 - cidr)) >>> 0;
-    const netNum   = (this.ipToNum(ip) & maskBits) >>> 0;
+    const netNum = (this.ipToNum(ip) & maskBits) >>> 0;
     return this.numToIP((netNum | ~maskBits) >>> 0);
   }
 
@@ -187,10 +187,10 @@ export class IPManager {
 
   _getIPClass(ip) {
     const first = parseInt(ip.split('.')[0]);
-    if (first < 128)  return 'A';
-    if (first < 192)  return 'B';
-    if (first < 224)  return 'C';
-    if (first < 240)  return 'D (Multicast)';
+    if (first < 128) return 'A';
+    if (first < 192) return 'B';
+    if (first < 224) return 'C';
+    if (first < 240) return 'D (Multicast)';
     return 'E (Reserved)';
   }
 
@@ -223,7 +223,7 @@ export class IPManager {
       if (!seen.has(assign.subnet)) {
         seen.add(assign.subnet);
         const parts = assign.subnet.split('/');
-        const net   = parts[0].split('.').map(Number);
+        const net = parts[0].split('.').map(Number);
         this.subnets.push({ network: net, cidr: parseInt(parts[1]), usedHosts: new Set([1]) });
       }
     }

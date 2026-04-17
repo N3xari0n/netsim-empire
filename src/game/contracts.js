@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Contracts & Missions System v1.0
-//  Developed by: Nexarion × Ollama × AntiGravity
+//  Developed by: N3xari0n × Ollama × AntiGravity
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -412,12 +412,12 @@ export class ContractsManager {
     this.ui.logEvent(`✅ Contract complete: "${contract.name}" +$${contract.reward.toLocaleString()} • +${contract.xpReward} XP`, 'success');
     this.ui.clearMissionBanner();
     this.ui.showContractComplete(contract);
-    
+
     if (GameState.activeSite === contract.id) {
-       setTimeout(() => {
-          this.ui.toast('🚀 Auto-Return', `Securing infrastructure. Teleporting to Home Lab...`, 'info');
-          if (window._netSimTeleportHome) window._netSimTeleportHome();
-       }, 3000);
+      setTimeout(() => {
+        this.ui.toast('🚀 Auto-Return', `Securing infrastructure. Teleporting to Home Lab...`, 'info');
+        if (window._netSimTeleportHome) window._netSimTeleportHome();
+      }, 3000);
     }
   }
 

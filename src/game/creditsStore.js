@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Credits Store & GCash Gateway
-//  Developed by: Nexarion × Ollama × AntiGravity
+//  Developed by: N3xari0n × Ollama × AntiGravity
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -11,11 +11,11 @@ export class CreditsStore {
   constructor(hud) {
     this.hud = hud;
     this.packs = [
-      { id: 'starter',    name: 'Starter Pack',      credits: 500,    price: 49.00,  bonus: null, deviceBonus: null, popular: false },
-      { id: 'growth',     name: 'Growth Pack',       credits: 2500,   price: 249.00,  bonus: '+250 credits', deviceBonus: null, popular: false },
-      { id: 'enterprise', name: 'Enterprise Pack',   credits: 7500,   price: 499.00,  bonus: '+1,000 credits', deviceBonus: '🎁 +3 Devices (2S, 1FW)', popular: true },
-      { id: 'megacorp',   name: 'Mega Corp Pack',    credits: 20000,  price: 999.00, bonus: '+3,500 credits', deviceBonus: '🎁 +8 Premium Devices', popular: false },
-      { id: 'global_isp', name: 'Global ISP Pack',   credits: 100000, price: 2499.00, bonus: '+20,000 credits', deviceBonus: '🎁 +18 Elite Devices & CDNs', popular: false },
+      { id: 'starter', name: 'Starter Pack', credits: 500, price: 49.00, bonus: null, deviceBonus: null, popular: false },
+      { id: 'growth', name: 'Growth Pack', credits: 2500, price: 249.00, bonus: '+250 credits', deviceBonus: null, popular: false },
+      { id: 'enterprise', name: 'Enterprise Pack', credits: 7500, price: 499.00, bonus: '+1,000 credits', deviceBonus: '🎁 +3 Devices (2S, 1FW)', popular: true },
+      { id: 'megacorp', name: 'Mega Corp Pack', credits: 20000, price: 999.00, bonus: '+3,500 credits', deviceBonus: '🎁 +8 Premium Devices', popular: false },
+      { id: 'global_isp', name: 'Global ISP Pack', credits: 100000, price: 2499.00, bonus: '+20,000 credits', deviceBonus: '🎁 +18 Elite Devices & CDNs', popular: false },
     ];
     this._loaded = true;
   }
@@ -94,15 +94,15 @@ export class CreditsStore {
           if (placedIdx >= devices.length) break;
           // Only check the border of the square to make a spiral-like search
           if (Math.abs(x) !== radius && Math.abs(y) !== radius) continue;
-          
+
           if (!gs.network.getNodeAt(ox + x, oy + y)) {
-             const type = devices[placedIdx];
-             const node = gs.network.addNode(type, ox + x, oy + y);
-             if (node && GameState.ipManager) {
-                 GameState.ipManager.assignAuto(node, gs.network);
-             }
-             placedIdx++;
-             placedCount++;
+            const type = devices[placedIdx];
+            const node = gs.network.addNode(type, ox + x, oy + y);
+            if (node && GameState.ipManager) {
+              GameState.ipManager.assignAuto(node, gs.network);
+            }
+            placedIdx++;
+            placedCount++;
           }
         }
       }
@@ -244,7 +244,7 @@ export class CreditsStore {
       <!-- Footer -->
       <div style="text-align:center;margin-top:16px;font-size:10px;color:rgba(255,255,255,.25);font-family:var(--font-mono);">
         Payments processed securely via PayMongo API. Credits are non-refundable.<br>
-        Developed by Nexarion × Ollama × AntiGravity
+        Developed by N3xari0n × Ollama × AntiGravity
       </div>
     `;
 

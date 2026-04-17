@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — In-Game CLI Terminal
-//  Developed by: Nexarion
+//  Developed by: N3xari0n
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
@@ -43,7 +43,7 @@ export class CLI {
     if (this.history.length === 0) {
       this._print('╔══════════════════════════════════════════════════╗', 'cyan');
       this._print('║    NetSim CLI v1.0 — Network Command Terminal     ║', 'cyan');
-      this._print('║    Developed by Nexarion                          ║', 'cyan');
+      this._print('║    Developed by N3xari0n                          ║', 'cyan');
       this._print('╚══════════════════════════════════════════════════╝', 'cyan');
       this._print('Type "help" for available commands.\n', 'muted');
     }
@@ -450,7 +450,7 @@ export class CLI {
   }
 
   _cmdCredits() {
-    this._print('Game credits: Nexarion × Ollama × AntiGravity', 'cyan');
+    this._print('Game credits: N3xari0n × Ollama × AntiGravity', 'cyan');
     this._print('NetSim Empire v1.0 — Educational Network Simulator', 'white');
   }
 
@@ -549,16 +549,16 @@ export class CLI {
   }
 
   // ── CONTRACTS ─────────────────────────────────────────────
-  
+
 
   _cmdContract(args) {
     if (args.length === 0) {
       this._print('Usage: contract [list | connect <id> | submit | abort]', 'amber');
       return;
     }
-    
+
     const action = args[0].toLowerCase();
-    
+
     if (action === 'list') {
       this._print('═══ Available Contracts ══════════════════════════', 'cyan');
       const avail = ALL_CONTRACTS.filter(c => GameState.level >= c.minLevel && !GameState.completedContracts.includes(c.id));
@@ -567,22 +567,22 @@ export class CLI {
         return;
       }
       avail.forEach(c => {
-         this._print(`[ ${c.id.padEnd(4)} ] ${c.name} [Reward: $${c.reward}]`, 'green');
-         this._print(`        Client: ${c.client}`, 'white');
-         this._print(`        Desc:   ${c.desc}`, 'muted');
+        this._print(`[ ${c.id.padEnd(4)} ] ${c.name} [Reward: $${c.reward}]`, 'green');
+        this._print(`        Client: ${c.client}`, 'white');
+        this._print(`        Desc:   ${c.desc}`, 'muted');
       });
       return;
     }
-    
+
     if (action === 'connect') {
       const id = args[1]?.toLowerCase();
       if (!id) { this._print('Usage: contract connect <id>', 'amber'); return; }
-      
+
       const contract = ALL_CONTRACTS.find(c => c.id.toLowerCase() === id);
       if (!contract) { this._print(`Contract ID ${id} not found.`, 'red'); return; }
       if (GameState.level < contract.minLevel) { this._print('Clearance level too low.', 'red'); return; }
       if (GameState.activeSite === id) { this._print('Already connected to this client site.', 'amber'); return; }
-      
+
       // Execute Teleport Pipeline
       if (GameState.contracts && GameState.contracts.accept(id, null)) {
         this._print(`[SYS] Initializing secure tunnel to ${contract.client}...`, 'cyan');
@@ -592,47 +592,47 @@ export class CLI {
       }
       return;
     }
-    
+
     if (action === 'submit') {
-       if (GameState.activeSite === 'home') {
-         this._print('You are currently in your Home Lab. Connect to a contract site first.', 'red');
-         return;
-       }
-       const contract = ALL_CONTRACTS.find(c => c.id === GameState.activeSite);
-       if (!contract) return;
-       
-       this._print(`[SYS] Initiating compliance scan for ${contract.client}...`, 'cyan');
-       // Validate against current grid
-       const netRef = window._netSimGetNetwork ? window._netSimGetNetwork() : this.network;
-       const res = contract.check(netRef, GameState);
-       if (res.done) {
-          GameState.money += contract.reward;
-          GameState.xp += contract.xpReward;
-          GameState.completedContracts.push(contract.id);
-          this._print(`[SYS] Scan Passed: ${res.reason}`, 'green');
-          this._print(`[SYS] Payment Received: $${contract.reward.toLocaleString()}. Contract Terminated.`, 'green');
-          
-          setTimeout(() => {
-             this._print(`[SYS] Dropping secure tunnel. Returning Home...`, 'cyan');
-             window._netSimTeleportHome();
-          }, 2000);
-          
-       } else {
-          this._print(`[SYS] Scan Failed: ${res.reason}`, 'red');
-       }
-       return;
+      if (GameState.activeSite === 'home') {
+        this._print('You are currently in your Home Lab. Connect to a contract site first.', 'red');
+        return;
+      }
+      const contract = ALL_CONTRACTS.find(c => c.id === GameState.activeSite);
+      if (!contract) return;
+
+      this._print(`[SYS] Initiating compliance scan for ${contract.client}...`, 'cyan');
+      // Validate against current grid
+      const netRef = window._netSimGetNetwork ? window._netSimGetNetwork() : this.network;
+      const res = contract.check(netRef, GameState);
+      if (res.done) {
+        GameState.money += contract.reward;
+        GameState.xp += contract.xpReward;
+        GameState.completedContracts.push(contract.id);
+        this._print(`[SYS] Scan Passed: ${res.reason}`, 'green');
+        this._print(`[SYS] Payment Received: $${contract.reward.toLocaleString()}. Contract Terminated.`, 'green');
+
+        setTimeout(() => {
+          this._print(`[SYS] Dropping secure tunnel. Returning Home...`, 'cyan');
+          window._netSimTeleportHome();
+        }, 2000);
+
+      } else {
+        this._print(`[SYS] Scan Failed: ${res.reason}`, 'red');
+      }
+      return;
     }
-    
+
     if (action === 'abort') {
-       if (GameState.activeSite === 'home') {
-         this._print('You are already at Home.', 'amber');
-         return;
-       }
-       this._print(`[SYS] Emergency Disconnect Triggered. Returning Home...`, 'red');
-       window._netSimTeleportHome();
-       return;
+      if (GameState.activeSite === 'home') {
+        this._print('You are already at Home.', 'amber');
+        return;
+      }
+      this._print(`[SYS] Emergency Disconnect Triggered. Returning Home...`, 'red');
+      window._netSimTeleportHome();
+      return;
     }
-    
+
     this._print(`Unknown contract command: ${action}`, 'red');
   }
 

@@ -1,17 +1,17 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Auto-Save Manager
-//  Developed by: Nexarion × Ollama × AntiGravity
+//  Developed by: N3xari0n × Ollama × AntiGravity
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';
 
 export class SaveManager {
   constructor(network, ipManager) {
-    this.network   = network;
+    this.network = network;
     this.ipManager = ipManager;
-    this.interval  = null;
-    this.lastSave  = null;
-    this.saving    = false;
+    this.interval = null;
+    this.lastSave = null;
+    this.saving = false;
     this.saveCount = 0;
   }
 
@@ -128,17 +128,17 @@ export class SaveManager {
       version: '2.0',
       timestamp: Date.now(),
       state: {
-        money:        gs.money,
-        level:        gs.level,
-        xp:           gs.xp,
-        xpNext:       gs.xpNext,
-        totalTime:    gs.totalTime,
-        downtime:     gs.downtime,
-        clients:      gs.clients,
+        money: gs.money,
+        level: gs.level,
+        xp: gs.xp,
+        xpNext: gs.xpNext,
+        totalTime: gs.totalTime,
+        downtime: gs.downtime,
+        clients: gs.clients,
         satisfaction: gs.satisfaction,
-        techTier:     gs.techTier,
-        credits:      gs.credits || 0,
-        mode:         gs.mode,
+        techTier: gs.techTier,
+        credits: gs.credits || 0,
+        mode: gs.mode,
         unlockedTech: [...gs.unlockedTech],
         completedContracts: gs.completedContracts,
       },
@@ -152,20 +152,20 @@ export class SaveManager {
   deserialize(data) {
     if (!data || data.version !== '2.0') return false;
     const gs = GameState;
-    const s  = data.state;
+    const s = data.state;
 
     // Restore state
-    gs.money        = s.money ?? 5000;
-    gs.level        = s.level || 1;
-    gs.xp           = s.xp || 0;
-    gs.xpNext       = s.xpNext || 500;
-    gs.totalTime    = s.totalTime || 0;
-    gs.downtime     = s.downtime || 0;
-    gs.clients      = s.clients || 0;
+    gs.money = s.money ?? 5000;
+    gs.level = s.level || 1;
+    gs.xp = s.xp || 0;
+    gs.xpNext = s.xpNext || 500;
+    gs.totalTime = s.totalTime || 0;
+    gs.downtime = s.downtime || 0;
+    gs.clients = s.clients || 0;
     gs.satisfaction = s.satisfaction || 100;
-    gs.techTier     = s.techTier || 1;
-    gs.credits      = s.credits || 0;
-    gs.mode         = s.mode || 'campaign';
+    gs.techTier = s.techTier || 1;
+    gs.credits = s.credits || 0;
+    gs.mode = s.mode || 'campaign';
     gs.unlockedTech = new Set(s.unlockedTech || []);
     gs.completedContracts = s.completedContracts || [];
 
@@ -189,10 +189,10 @@ export class SaveManager {
     for (const lk of data.network.links) {
       // Find nodes by original position
       const fromOriginal = data.network.nodes.find(n => n.id === lk.fromId);
-      const toOriginal   = data.network.nodes.find(n => n.id === lk.toId);
+      const toOriginal = data.network.nodes.find(n => n.id === lk.toId);
       if (fromOriginal && toOriginal) {
         const fromNode = nodeArr.find(n => n.gridX === fromOriginal.gridX && n.gridY === fromOriginal.gridY);
-        const toNode   = nodeArr.find(n => n.gridX === toOriginal.gridX && n.gridY === toOriginal.gridY);
+        const toNode = nodeArr.find(n => n.gridX === toOriginal.gridX && n.gridY === toOriginal.gridY);
         if (fromNode && toNode) {
           const link = this.network.addLink(fromNode.id, toNode.id, lk.cableType);
           if (link) {

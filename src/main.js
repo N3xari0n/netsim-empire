@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Main Entry Point & Game Loop v1.0
-//  Developed by: Nexarion × Ollama × AntiGravity
+//  Developed by: N3xari0n × Ollama × AntiGravity
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './game/gameState.js';
@@ -116,17 +116,17 @@ function showAuthScreen() {
 
   triggers.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      if(btn.tagName === 'A') e.preventDefault();
-      
+      if (btn.tagName === 'A') e.preventDefault();
+
       // Remove active from Main Tabs
       document.querySelectorAll('.auth-tabs button').forEach(b => b.classList.remove('active'));
-      
+
       // If clicking a physical tab, set it active
       if (btn.tagName === 'BUTTON' && btn.parentElement.classList.contains('auth-tabs')) {
-         btn.classList.add('active');
+        btn.classList.add('active');
       }
 
-      Object.values(forms).forEach(f => { if(f) f.classList.add('hidden'); });
+      Object.values(forms).forEach(f => { if (f) f.classList.add('hidden'); });
       const target = btn.dataset.target;
       if (forms[target]) forms[target].classList.remove('hidden');
       errBox.classList.add('hidden');
@@ -153,21 +153,21 @@ function showAuthScreen() {
         const data = await res.json();
         btn.textContent = 'RESET AUTHORITY';
         if (data.success) {
-           errBox.textContent = data.message + ` (${data.codesRemaining} codes left)`;
-           errBox.style.color = 'var(--green)';
-           errBox.classList.remove('hidden');
-           setTimeout(() => {
-             errBox.style.color = '';
-             document.querySelector('[data-target="login"]').click();
-           }, 3000);
+          errBox.textContent = data.message + ` (${data.codesRemaining} codes left)`;
+          errBox.style.color = 'var(--green)';
+          errBox.classList.remove('hidden');
+          setTimeout(() => {
+            errBox.style.color = '';
+            document.querySelector('[data-target="login"]').click();
+          }, 3000);
         } else {
-           errBox.textContent = data.error;
-           errBox.classList.remove('hidden');
+          errBox.textContent = data.error;
+          errBox.classList.remove('hidden');
         }
       } catch {
-         errBox.textContent = 'Server error. Try again.';
-         errBox.classList.remove('hidden');
-         btn.textContent = 'RESET AUTHORITY';
+        errBox.textContent = 'Server error. Try again.';
+        errBox.classList.remove('hidden');
+        btn.textContent = 'RESET AUTHORITY';
       }
     });
   }
@@ -238,12 +238,12 @@ function showAuthScreen() {
       if (data.success) {
         GameState.currentUser = data.user;
         authScreen.classList.add('hidden');
-        
+
         // Push 12 Backup Codes to Modal instantly
         if (data.backupCodes) {
-           const codeList = document.getElementById('backupCodesList');
-           if (codeList) codeList.innerHTML = data.backupCodes.map(c => `<div>${c}</div>`).join('');
-           document.getElementById('backupCodesDisplay')?.classList.remove('hidden');
+          const codeList = document.getElementById('backupCodesList');
+          if (codeList) codeList.innerHTML = data.backupCodes.map(c => `<div>${c}</div>`).join('');
+          document.getElementById('backupCodesDisplay')?.classList.remove('hidden');
         }
 
         initSplash();
@@ -322,41 +322,41 @@ function initSplash() {
   if (btnSettings2) btnSettings2.onclick = openSettings;
 
   document.getElementById('btnRegenerateCodes')?.addEventListener('click', async () => {
-      const pwd = document.getElementById('regenPassword').value;
-      if(!pwd) return hud?.toast('Error', 'Input current password to regenerate keys.', 'red');
-      
-      const res = await fetch('/api/auth/settings/regenerate', {
-          method: 'POST', headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({password: pwd})
-      });
-      const body = await res.json();
-      if(body.success) {
-          document.getElementById('regenPassword').value = '';
-          const codeList = document.getElementById('backupCodesList');
-          if(codeList) codeList.innerHTML = body.backupCodes.map(c => `<div>${c}</div>`).join('');
-          document.getElementById('settingsModal').classList.add('hidden');
-          document.getElementById('backupCodesDisplay').classList.remove('hidden');
-      } else {
-          hud?.toast('Authentication Refused', body.error, 'red');
-      }
+    const pwd = document.getElementById('regenPassword').value;
+    if (!pwd) return hud?.toast('Error', 'Input current password to regenerate keys.', 'red');
+
+    const res = await fetch('/api/auth/settings/regenerate', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwd })
+    });
+    const body = await res.json();
+    if (body.success) {
+      document.getElementById('regenPassword').value = '';
+      const codeList = document.getElementById('backupCodesList');
+      if (codeList) codeList.innerHTML = body.backupCodes.map(c => `<div>${c}</div>`).join('');
+      document.getElementById('settingsModal').classList.add('hidden');
+      document.getElementById('backupCodesDisplay').classList.remove('hidden');
+    } else {
+      hud?.toast('Authentication Refused', body.error, 'red');
+    }
   });
 
   document.getElementById('btnDeleteRequest')?.addEventListener('click', async () => {
-      const u = document.getElementById('delUsername').value;
-      const p = document.getElementById('delPassword').value;
-      if(!u || !p) return hud?.toast('Error', 'Fill all required identity fields', 'amber');
-      
-      const res = await fetch('/api/auth/settings/delete-request', {
-          method: 'POST', headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({username: u, password: p})
-      });
-      const body = await res.json();
-      if(body.success) {
-          alert('ACCOUNT FLAG RECEIVED. SESSION TERMINATED.');
-          window.location.reload();
-      } else {
-          hud?.toast('Purge Failed', body.error, 'red');
-      }
+    const u = document.getElementById('delUsername').value;
+    const p = document.getElementById('delPassword').value;
+    if (!u || !p) return hud?.toast('Error', 'Fill all required identity fields', 'amber');
+
+    const res = await fetch('/api/auth/settings/delete-request', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+    const body = await res.json();
+    if (body.success) {
+      alert('ACCOUNT FLAG RECEIVED. SESSION TERMINATED.');
+      window.location.reload();
+    } else {
+      hud?.toast('Purge Failed', body.error, 'red');
+    }
   });
 
   const btnLogout = document.getElementById('btnLogout');
@@ -378,10 +378,10 @@ async function startGame(mode) {
   document.getElementById('splash').classList.add('hidden');
   document.getElementById('gameUI').classList.remove('hidden');
   document.getElementById('modeVal').textContent = mode === 'campaign' ? 'Campaign' : 'Sandbox';
-  
+
   if (!localStorage.getItem('netsim_perf_ack_v2')) {
-     document.getElementById('perfAdvisoryModal')?.classList.remove('hidden');
-     localStorage.setItem('netsim_perf_ack_v2', 'true');
+    document.getElementById('perfAdvisoryModal')?.classList.remove('hidden');
+    localStorage.setItem('netsim_perf_ack_v2', 'true');
   }
 
   GameState.reset();
@@ -969,7 +969,7 @@ function bindUI() {
       }
       return;
     }
-    
+
     // Ignore physical holding limits for system menus
     if (e.repeat && !['Backspace', 'Delete'].includes(e.key)) return;
 
@@ -1434,7 +1434,7 @@ window._netSimTeleportToClient = (contractId) => {
   network = new Network();
   ipManager = new IPManager();
   GameState.activeSite = contractId;
-  
+
   // Re-bind engine singletons
   GameState.network = network;
   GameState.ipManager = ipManager;
@@ -1446,7 +1446,7 @@ window._netSimTeleportToClient = (contractId) => {
 
   hud.toast('🚀 Teleporting...', 'Connecting to client environment.', 'warn');
   hud.logEvent(`Teleported to Client Site: ${contractId}`, 'warn');
-  
+
   // Clear selection
   selectedNode = null;
   hud.hideInspector();
@@ -1462,7 +1462,7 @@ window._netSimTeleportHome = () => {
   GameState.activeSite = 'home';
   GameState.homeNetwork = null;
   GameState.homeIpManager = null;
-  
+
   // Re-bind engine singletons
   GameState.network = network;
   GameState.ipManager = ipManager;
@@ -1473,10 +1473,10 @@ window._netSimTeleportHome = () => {
   cli.ipManager = ipManager;
 
   saveManager.startAutoSave();
-  
+
   hud.toast('🏠 Returned', 'Reconnected to Home Lab.', 'success');
   hud.logEvent('Returned to base.', 'info');
-  
+
   // Clear selection
   selectedNode = null;
   hud.hideInspector();
