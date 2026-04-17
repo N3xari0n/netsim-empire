@@ -330,6 +330,7 @@ export class HUD {
     document.querySelectorAll('.cable-btn[data-cable]').forEach(btn => {
       const cable = btn.dataset.cable;
       const techMap = {
+        'wireless': 'wifi_ap',
         'fiber': 'fiber_cable',
         'fiber400': 'fiber_400g',
         'satellite': 'satellite'
