@@ -509,6 +509,49 @@
 
         </div>
 
+        <div style="text-align:center;margin:32px 0 16px; border-bottom: 1px dashed var(--muted); padding-bottom: 16px;">
+          <div style="font-family:var(--font-logo);font-size:18px;color:var(--amber);letter-spacing:2px;text-shadow:0 0 10px rgba(255,191,0,.3);margin-bottom:4px;">
+            > PART 2: HARDWARE TIERS & CAPABILITIES
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;">EQUIPMENT DATABASE // CLASSIFIED</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; font-family: var(--font-mono);">
+          
+          <div style="background:rgba(0,0,0,0.4); border-left: 3px solid #a0b4d0; padding:12px; border-radius:0 4px 4px 0;">
+             <span style="color:#a0b4d0; font-weight:bold;">[TIER 1] ENDPOINTS & BASIC ROUTING</span>
+             <div style="font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4;">
+               <span style="color:var(--white);">Mobiles, Laptops, PCs, Switches, Routers, Servers</span><br>
+               The backbone of local subnets. Generate packets and handle basic routing. These are highly vulnerable to localized cyber-strikes.
+             </div>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.4); border-left: 3px solid #ff2244; padding:12px; border-radius:0 4px 4px 0;">
+             <span style="color:#ff2244; font-weight:bold;">[TIER 2] FIREWALLS & WIRELESS</span>
+             <div style="font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4;">
+               <span style="color:var(--white);">Firewalls, WiFi APs</span><br>
+               Firewalls actively filter incoming traffic packets — any Malware or DDoS worm routed through a Firewall will be instantly dropped. Always position Firewalls at your network perimeter. WiFi APs unlock local wireless routing for Mobile devices.
+             </div>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.4); border-left: 3px solid #ff6b9d; padding:12px; border-radius:0 4px 4px 0;">
+             <span style="color:#ff6b9d; font-weight:bold;">[TIER 3] THREAT DETECTION & BALANCING</span>
+             <div style="font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4;">
+               <span style="color:var(--white);">Load Balancers, IDS/IPS</span><br>
+               Distribute heavy server loads to prevent congestion loops. The IDS (Intrusion Detection System) operates like a next-gen firewall, deeply inspecting packets to stop sophisticated threat actors before they penetrate the core.
+             </div>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.4); border-left: 3px solid #ff006e; padding:12px; border-radius:0 4px 4px 0;">
+             <span style="color:#ff006e; font-weight:bold;">[TIER 4 & 5] HYPERSCALE & AI</span>
+             <div style="font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4;">
+               <span style="color:var(--white);">CDN Nodes, Core Routers, Hyperscalers</span><br>
+               Enterprise-grade routing. CDNs naturally absorb and nullify brute-force DDoS attacks. AI-Optimized Core Routers intuitively drop anomalies, while Hyperscalers have sufficient mass to absorb all malicious bandwidth natively. Use these for Global Contracts.
+             </div>
+          </div>
+
+        </div>
+
         <div
           style="background:rgba(255,255,255,.02); border:1px solid var(--border); padding:16px; font-family: var(--font-mono);">
           <div style="color:var(--muted); letter-spacing:1px; margin-bottom:12px; font-size:12px; font-weight:bold;">>

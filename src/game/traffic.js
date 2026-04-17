@@ -241,10 +241,33 @@ export class TrafficSimulator {
         return;
       }
 
-      // Firewall drop Check
-      if (nextNode.type === 'Firewall' && pkt.malicious) {
-        this._totalLost++;
-        return; // Dropped
+      // Defensive Security Drops
+      if (pkt.malicious) {
+        let mitigated = false;
+        
+        switch (nextNode.type) {
+          case 'Firewall':
+            mitigated = true; // Classic filtering
+            break;
+          case 'IDS':
+            mitigated = true; // Intrusion Prevention deeply inspects and stops threats
+            break;
+          case 'CDN':
+            if (pkt.type === 'DDOS') mitigated = true; // Edge nodes absorb brute-force attacks
+            break;
+          case 'Hyperscaler':
+            mitigated = true; // Massive infra drops all attack packets natively
+            break;
+          case 'CoreRouter':
+            if (GameState.unlockedTech.has('ai_optimizer')) mitigated = true; // Core router with AI blocks anomalies
+            break;
+        }
+
+        if (mitigated) {
+          nextNode.pulseAnim = 10; // Visual flash indication of blocked attack
+          this._totalLost++;
+          return; // Successfully dropped
+        }
       }
 
       // Congestion drop
