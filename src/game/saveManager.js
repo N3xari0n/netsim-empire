@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Auto-Save Manager
-//  Developed by: N3xari0n × Ollama × AntiGravity
+//  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './gameState.js';

@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 //  NetSim Empire — Main Entry Point & Game Loop v1.0
-//  Developed by: N3xari0n × Ollama × AntiGravity
+//  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
 import GameState from './game/gameState.js';
@@ -661,6 +661,8 @@ function bindUI() {
     if (modal.classList.contains('hidden')) {
       hud.renderContractsModal(contracts);
       modal.classList.remove('hidden');
+      // Notify tutorial system that contracts were opened
+      if (tutorial && tutorial.active) tutorial.notifyContractsOpened();
     } else {
       modal.classList.add('hidden');
     }
@@ -894,26 +896,30 @@ function bindUI() {
           return;
         }
 
-        const oldHealth = selectedNode.health;
-        selectedNode.rebooting = true;
-        selectedNode.online = false;
+        // CRITICAL: Capture node reference NOW so clicking another device during
+        // the 5s repair window doesn't corrupt which node gets restored.
+        const nodeToRepair = selectedNode;
+        const oldHealth = nodeToRepair.health;
+        nodeToRepair.rebooting = true;
+        nodeToRepair.online = false;
         network._invalidateCache(); // Disable all routing immediately
-        hud.toast('🔧 Repairing', `Fixing ${selectedNode.label}... (Downtime: 5s, Cost: $${cost.toLocaleString()})`, 'info');
-        hud.showInspector(selectedNode);
+        hud.toast('🔧 Repairing', `Fixing ${nodeToRepair.label}... (Downtime: 5s, Cost: $${cost.toLocaleString()})`, 'info');
+        hud.showInspector(nodeToRepair);
 
         setTimeout(() => {
-          if (!network.nodes.has(selectedNode.id)) return; // Node got deleted
+          if (!network.nodes.has(nodeToRepair.id)) return; // Node got deleted
 
-          selectedNode.rebooting = false;
-          selectedNode.rebootCount++;
-          selectedNode.repair(selectedNode.healthMax); // Changes .online back to true
+          nodeToRepair.rebooting = false;
+          nodeToRepair.rebootCount++;
+          nodeToRepair.repair(nodeToRepair.healthMax); // Changes .online back to true
           network._invalidateCache();
 
-          hud.toast('✅ Repair Complete', `${selectedNode.label} is fully restored.`, 'success');
-          hud.logEvent(`Repaired ${selectedNode.label}: ${oldHealth}→${selectedNode.healthMax} HP (Cost: $${cost})`, 'success');
+          hud.toast('✅ Repair Complete', `${nodeToRepair.label} is fully restored.`, 'success');
+          hud.logEvent(`Repaired ${nodeToRepair.label}: ${oldHealth}→${nodeToRepair.healthMax} HP (Cost: $${cost})`, 'success');
 
-          if (selectedNode && selectedNode.id === selectedNode.id && !document.getElementById('inspectorPanel').classList.contains('hidden')) {
-            hud.showInspector(selectedNode);
+          // Only refresh inspector if the repaired node is still the currently selected one
+          if (selectedNode && selectedNode.id === nodeToRepair.id && !document.getElementById('inspectorPanel').classList.contains('hidden')) {
+            hud.showInspector(nodeToRepair);
           }
         }, 5000);
       }
@@ -991,6 +997,7 @@ function bindUI() {
         document.getElementById('pauseOverlay')?.classList.toggle('hidden', !GameState.paused);
         hud.logEvent(GameState.paused ? 'Game paused' : 'Game resumed', 'info');
         break;
+      case 'g': case 'G': setActiveTool('ping'); break;
       case 'r': case 'R': setActiveTool('Router'); break;
       case 's': case 'S': setActiveTool('Switch'); break;
       case 'c': case 'C': setActiveTool('cable'); break;
