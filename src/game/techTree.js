@@ -40,7 +40,7 @@ export const TECH_TREE = {
       { id: 'bgp',           name: 'BGP Routing',       icon: '🌐',  cost: 18000, desc: 'Inter-domain routing protocol.', prereq: ['basic_router', 'qos_basic'] },
       { id: 'sdn_basic',     name: 'SDN Controller',    icon: '🤖',  cost: 25000, desc: 'Software-defined networking automation.', prereq: ['vlan', 'bgp'] },
       { id: 'cdn_node',      name: 'CDN Node',          icon: '🌍',  cost: 22000, desc: 'Edge content delivery node.', prereq: ['load_balancer'] },
-      { id: 'auto_heal',     name: 'Auto-Recovery',     icon: '♻️',  cost: 12000, desc: 'Automatically repair downed devices.', prereq: ['ids', 'sdn_basic'] },
+      { id: 'auto_heal',     name: 'Auto-Recovery',     icon: '♻️',  cost: 12000, desc: 'Automatically repair downed devices.', prereq: ['ids_device', 'sdn_basic'] },
     ],
   },
 
@@ -75,14 +75,14 @@ export const ALL_TECH = Object.values(TECH_TREE).flatMap(tier => tier.nodes);
 export class TechTreeManager {
   constructor(ui) {
     this.ui = ui;
+    this._autoHealInterval = null;
   }
 
   canUnlock(techId) {
     const tech = ALL_TECH.find(t => t.id === techId);
     if (!tech) return false;
-    if (GameState.unlockedTech.has(techId)) return false;   // already unlocked
+    if (GameState.unlockedTech.has(techId)) return false;
     if (GameState.money < tech.cost) return false;
-    // All prereqs unlocked
     return tech.prereq.every(p => GameState.unlockedTech.has(p));
   }
 
@@ -107,10 +107,7 @@ export class TechTreeManager {
     GameState.unlockedTech.add(techId);
     GameState.gainXP(tech.cost / 20);
 
-    // Update tier
     this._updateTier();
-
-    // Apply effects
     this._applyEffect(techId);
 
     this.ui.toast(`🔬 Tech Unlocked`, `${tech.icon} ${tech.name}`, 'success');
@@ -125,8 +122,8 @@ export class TechTreeManager {
     if (GameState.unlockedTech.has(techId)) return 'unlocked';
     const tech = ALL_TECH.find(t => t.id === techId);
     if (!tech) return 'locked';
-    if (!tech.prereq.every(p => GameState.unlockedTech.has(p))) return 'locked';
-    return 'available';
+    const prereqsMet = tech.prereq.every(p => GameState.unlockedTech.has(p));
+    return prereqsMet ? 'available' : 'locked';
   }
 
   _updateTier() {
@@ -143,7 +140,6 @@ export class TechTreeManager {
   }
 
   _applyEffect(techId) {
-    // Side effects from unlocking techs
     switch (techId) {
       case 'auto_heal':
         this._enableAutoHeal();
@@ -155,7 +151,9 @@ export class TechTreeManager {
   }
 
   _enableAutoHeal() {
-    setInterval(() => {
+    // Prevent stacking intervals on game reset
+    if (this._autoHealInterval) clearInterval(this._autoHealInterval);
+    this._autoHealInterval = setInterval(() => {
       if (GameState.unlockedTech.has('auto_heal') && GameState.network) {
         for (const node of GameState.network.nodes.values()) {
           if (node.health < node.healthMax) {
@@ -164,14 +162,6 @@ export class TechTreeManager {
         }
       }
     }, 3000);
-  }
-
-  getTechStatus(techId) {
-    if (GameState.unlockedTech.has(techId)) return 'unlocked';
-    const tech = ALL_TECH.find(t => t.id === techId);
-    if (!tech) return 'locked';
-    const prereqsMet = tech.prereq.every(p => GameState.unlockedTech.has(p));
-    return prereqsMet ? 'available' : 'locked';
   }
 }
 

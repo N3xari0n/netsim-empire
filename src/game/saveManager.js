@@ -125,7 +125,7 @@ export class SaveManager {
     }
 
     return {
-      version: '2.0',
+      version: '1.1',
       timestamp: Date.now(),
       state: {
         money: gs.money,
@@ -150,7 +150,14 @@ export class SaveManager {
   // ── Deserialize ───────────────────────────────────────────
 
   deserialize(data) {
-    if (!data || data.version !== '2.0') return false;
+    if (!data || data.version !== '1.1') {
+      // Also accept older saves for migration
+      if (data && data.version === '2.0') {
+        // Allow migration from old format
+      } else {
+        return false;
+      }
+    }
     const gs = GameState;
     const s = data.state;
 

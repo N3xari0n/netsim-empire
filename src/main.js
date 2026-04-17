@@ -273,6 +273,9 @@ function initMatrixBackground() {
   function resizeCanvas() {
     splashCanvas.width = window.innerWidth;
     splashCanvas.height = window.innerHeight;
+    // Draw initial solid dark background so matrix rain is visible
+    sCtx.fillStyle = '#050810';
+    sCtx.fillRect(0, 0, splashCanvas.width, splashCanvas.height);
   }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
@@ -871,9 +874,11 @@ function bindUI() {
   // ── Inspector buttons ─────────────────────────────────────
   document.getElementById('inspDelete').addEventListener('click', () => {
     if (selectedNode) {
+      const label = selectedNode.label;
       network.removeNode(selectedNode.id);
       ipManager.removeAssignment(selectedNode.id);
-      hud.logEvent(`Deleted ${selectedNode.label}`, 'warning');
+      hud.toast('🗑️ Removed', `${label} has been deleted.`, 'warn');
+      hud.logEvent(`Deleted ${label}`, 'warning');
       deselect();
     }
   });
@@ -985,9 +990,11 @@ function bindUI() {
       case 'Delete':
       case 'Backspace':
         if (selectedNode) {
+          const label = selectedNode.label;
           network.removeNode(selectedNode.id);
           ipManager.removeAssignment(selectedNode.id);
-          hud.logEvent(`Deleted ${selectedNode.label}`, 'warning');
+          hud.toast('🗑️ Removed', `${label} has been deleted.`, 'warn');
+          hud.logEvent(`Deleted ${label}`, 'warning');
           deselect();
         }
         break;
@@ -1131,14 +1138,18 @@ function handleCanvasClick(gridX, gridY, sx, sy) {
 
   if (activeTool === 'delete') {
     if (existingNode) {
+      const label = existingNode.label;
       network.removeNode(existingNode.id);
       ipManager.removeAssignment(existingNode.id);
-      hud.logEvent(`Deleted ${existingNode.label}`, 'warning');
+      hud.toast('🗑️ Removed', `${label} has been deleted.`, 'warn');
+      hud.logEvent(`Deleted ${label}`, 'warning');
     } else {
       const link = getLinkAtScreen(sx, sy);
       if (link) {
+        const label = link.label;
         network.removeLink(link.id);
-        hud.logEvent(`Removed ${link.label} cable`, 'warning');
+        hud.toast('✂️ Cable Cut', `${label} cable removed.`, 'warn');
+        hud.logEvent(`Removed ${label} cable`, 'warning');
       }
     }
     return;
