@@ -12,7 +12,7 @@
 <img src="https://img.shields.io/badge/Engine-Vanilla_JS-39ff14?style=for-the-badge&logoColor=black">
 <img src="https://img.shields.io/badge/Backend-Node.js_+_SQLite-ffbf00?style=for-the-badge&logoColor=black">
 <img src="https://img.shields.io/badge/Auth-Bcrypt_SHA256-ff2244?style=for-the-badge&logoColor=black">
-<img src="https://img.shields.io/badge/Version-1.0-9d00ff?style=for-the-badge&logoColor=black">
+<img src="https://img.shields.io/badge/Version-1.1-9d00ff?style=for-the-badge&logoColor=black">
 
 </div>
 
@@ -152,6 +152,6 @@ This public archive has been sanitized. All active production `.env` payloads an
 
 ---
 
-<sub>NetSim Empire v1.0 — © 2026 N3xari0n × arrikusuz × Repzyu5. All rights reserved.</sub>
+<sub>NetSim Empire v1.1 — © 2026 N3xari0n × arrikusuz × Repzyu5. All rights reserved.</sub>
 
 </div>

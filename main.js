@@ -37,7 +37,7 @@ app.use((req, res) => {
 // Start Server
 app.listen(PORT, () => {
     console.log(`===============================================`);
-    console.log(` NetSim Empire v1.0 - Node Engine Active       `);
+    console.log(` NetSim Empire v1.1 - Node Engine Active       `);
     console.log(` Running locally on: http://localhost:${PORT}  `);
     console.log(`===============================================`);
 });

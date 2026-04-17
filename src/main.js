@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  NetSim Empire — Main Entry Point & Game Loop v1.0
+//  NetSim Empire — Main Entry Point & Game Loop v1.1
 //  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
@@ -56,7 +56,7 @@ let nodeToMove = null;
 const canvas = document.getElementById('gameCanvas');
 
 // ════════════════════════════════════════════════════════════
-//  BOOTSTRAP v1.0 (Auth & Security)
+//  BOOTSTRAP v1.1 (Auth & Security)
 // ════════════════════════════════════════════════════════════
 
 initMatrixBackground();
@@ -431,7 +431,7 @@ async function startGame(mode) {
     if (mode === 'sandbox') {
       placeSampleNetwork();
     } else {
-      hud.logEvent('Welcome to NetSim Empire v1.0', 'info');
+      hud.logEvent('Welcome to NetSim Empire v1.1', 'info');
       hud.toast('🎯 Campaign Started', 'Accept contracts to begin.', 'info');
       // If it's a completely fresh start
       if (typeof tutorial !== 'undefined') tutorial.start();
@@ -1167,7 +1167,7 @@ function handleCanvasClick(gridX, gridY, sx, sy) {
     }
 
     const node = network.addNode(activeTool, gridX, gridY);
-    ipManager.assignAuto(node, network); // v1.0 Auto assign IP
+    ipManager.assignAuto(node, network); // v1.1 Auto assign IP
 
     hud.logEvent(`Placed ${def.label} at (${gridX}, ${gridY}) — $${def.cost}`, 'info');
     GameState.gainXP(def.cost / 50);
@@ -1378,10 +1378,10 @@ function sendMessageBetweenNodes(srcId, dstId, packetType = 'HTTP') {
   hud.logEvent(`Sent ${pktDef.type}: ${src.label} → ${dst.label} (${path.nodes.length} hops, cost ${path.cost.toFixed(1)})`, 'info');
 }
 
-// Expose for the send-message modal
+// Expose for the send-message modal (use getters so refs are always current)
 window._netSimSendMessage = sendMessageBetweenNodes;
 window._netSimGetNetwork = () => network;
-window._netSimHUD = hud;
+Object.defineProperty(window, '_netSimHUD', { get: () => hud, configurable: true });
 
 // ════════════════════════════════════════════════════════════
 //  UI DRAGGABLE HANDLER
@@ -1479,7 +1479,12 @@ window._netSimTeleportHome = () => {
   cli.network = network;
   cli.ipManager = ipManager;
 
+  // Re-bind saveManager references and force immediate save
+  // so completedContracts persists before any potential page refresh
+  saveManager.network = network;
+  saveManager.ipManager = ipManager;
   saveManager.startAutoSave();
+  saveManager.save(); // Force immediate save
 
   hud.toast('🏠 Returned', 'Reconnected to Home Lab.', 'success');
   hud.logEvent('Returned to base.', 'info');

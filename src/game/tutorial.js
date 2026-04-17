@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  NetSim Empire — Interactive Tutorial System v1.0
+//  NetSim Empire — Interactive Tutorial System v1.1
 //  Expanded with Contracts walkthrough
 // ═══════════════════════════════════════════════════════════
 

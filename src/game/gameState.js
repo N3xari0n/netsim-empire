@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  NetSim Empire — Game State Singleton v1.0
+//  NetSim Empire — Game State Singleton v1.1
 //  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 

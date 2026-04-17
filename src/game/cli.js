@@ -42,7 +42,7 @@ export class CLI {
     this.input?.focus();
     if (this.history.length === 0) {
       this._print('╔══════════════════════════════════════════════════╗', 'cyan');
-      this._print('║    NetSim CLI v1.0 — Network Command Terminal     ║', 'cyan');
+      this._print('║    NetSim CLI v1.1 — Network Command Terminal     ║', 'cyan');
       this._print('║    Developed by N3xari0n                          ║', 'cyan');
       this._print('╚══════════════════════════════════════════════════╝', 'cyan');
       this._print('Type "help" for available commands.\n', 'muted');
@@ -451,7 +451,7 @@ export class CLI {
 
   _cmdCredits() {
     this._print('Game credits: N3xari0n × arrikusuz × Repzyu5', 'cyan');
-    this._print('NetSim Empire v1.0 — Educational Network Simulator', 'white');
+    this._print('NetSim Empire v1.1 — Educational Network Simulator', 'white');
   }
 
   // ── DEPLOY ────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  NetSim Empire — Contracts & Missions System v1.0
+//  NetSim Empire — Contracts & Missions System v1.1
 //  Developed by: N3xari0n × arrikusuz × Repzyu5
 // ═══════════════════════════════════════════════════════════
 
